@@ -1,0 +1,30 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo"
+      xmlns:dl="nativescript-dynamic-label"
+      class="page"
+>
+
+    <Page.actionBar>
+        <ActionBar title="DynamicLabel Demo" icon="" class="action-bar">
+        </ActionBar>
+    </Page.actionBar>
+
+    <StackLayout>
+    <ScrollView height="1000">
+        <StackLayout>
+            <Label className='dlabel' text='normal label'/>
+            <dl:DynamicLabel className='dlabel' text="dynamic label"/>
+            <dl:DynamicLabel className='dlabel' text="X"/>
+            <dl:DynamicLabel className='dlabel' text="first"/>
+            <dl:DynamicLabel className='dlabel' text="second label" />
+            <dl:DynamicLabel className='dlabel' text="third label in set" textWrap="false"/>
+            <dl:DynamicLabel className='dlabel' text="fourth label, with wrap" textWrap="true"/>
+            <dl:DynamicLabel className='dlabel' text="fifth entry is a long line of text" textWrap="true"/>
+            <dl:DynamicLabel className='dlabel' text="seventh entry is a VERY long rambling paragraph that really shouldn't fit after all is said and done and computed" textWrap="true"/>
+            <dl:DynamicLabel className='dlabel' text="The8thEntryHasNoPlaceToBreakTheWordsAtAndWillCharacterWrapToFit" textWrap="true"/>
+            <dl:DynamicLabel className='dlabel' text="The9thEntryIsAlsoLongButForcedToOneLineSoItWillAppearTiny" textWrap="false"/>
+            <dl:DynamicLabel className='dlabel' text="The 10th Entry" textWrap="false"/>
+            <Button className='demoButton' text="next demo" tap="onNext"/>
+        </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</Page>
