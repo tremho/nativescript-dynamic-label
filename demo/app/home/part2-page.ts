@@ -1,7 +1,5 @@
 import { DynamicLabel } from 'nativescript-dynamic-label';
-import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout'
-import { View } from 'tns-core-modules/ui/core/view'
-import { Color } from "tns-core-modules/color";
+import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout';
 
 /*
 In NativeScript, a file with the same name as an XML file is known as
@@ -11,14 +9,12 @@ logic, and to set up your page’s data binding.
 
 import { NavigatedData, Page } from "tns-core-modules/ui/page";
 
-import { HomeViewModel } from "./home-view-model";
-
 let container;
 let dynLabel;
 let step = 0;
 let textWrap = true;
 
-const testText : string[] = [
+const testText: string[] = [
     "Go",
     "Seattle",
     "Vashon",
@@ -34,22 +30,22 @@ export function onNavigatingTo(args: NavigatedData) {
     container = page.getViewById('container') as StackLayout;
 
     // create a DynamicLabel with code and put it on our page
-    dynLabel = new DynamicLabel()
+    dynLabel = new DynamicLabel();
     dynLabel.width = 150;
     dynLabel.height = 30;
-    dynLabel.backgroundColor = '#ccccff'
-    dynLabel.text = 'Dynamic Label'
-    container.addChild(dynLabel)
+    dynLabel.backgroundColor = '#ccccff';
+    dynLabel.text = 'Dynamic Label';
+    container.addChild(dynLabel);
     step = 0;
 
 }
 
 export function onNext (args)  {
-    dynLabel.text = testText[step++] || ''
+    dynLabel.text = testText[step++] || '';
     dynLabel.paddingTop = 0;
     dynLabel.fontSize = 20;
-    dynLabel.fitText()
-    if(step > testText.length) {
+    dynLabel.fitText();
+    if (step > testText.length) {
         step = 0;
         dynLabel.textWrap = !dynLabel.textWrap;
     }
@@ -62,5 +58,5 @@ export function onBack (args)  {
 
     console.log('onBack');
 
-    page.frame.navigate('home/home-page')
+    page.frame.navigate('home/home-page');
 }

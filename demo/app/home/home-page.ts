@@ -1,4 +1,4 @@
-import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout'
+import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout';
 
 /*
 In NativeScript, a file with the same name as an XML file is known as
@@ -12,5 +12,5 @@ export function onNext (args)  {
 
     console.log('onNext');
 
-    page.frame.navigate('home/part2-page')
+    page.frame.navigate('home/part2-page');
 }
