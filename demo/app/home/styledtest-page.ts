@@ -1,7 +1,7 @@
 
 import { Observable } from 'tns-core-modules/data/observable';
 
-let labels = []
+let labels = [];
 let props;
 let step = 0;
 
@@ -70,12 +70,12 @@ export function onNavigatingTo (args) {
     const page = args.object;
     step = 0;
 
-    for(let i=1; i <=6; i++) {
-        labels[i] = page.getViewById('styledLabel'+i)
+    for (let i = 1; i <= 6; i++) {
+        labels[i] = page.getViewById('styledLabel' + i);
     }
 
     props = new PropModel();
-    props.style = 'default'
+    props.style = '';
     props.text1 = 'First Label';
     props.text2 = 'Second Label';
     props.text3 = 'The Third Label';
@@ -88,20 +88,20 @@ export function onNavigatingTo (args) {
 function show() {
 
     const style = 'style' + step;
-    props.set('style', style) //update the label
+    props.set('style', style); // update the label
     // set the classes to the labels directly
-    for(let i=1; i<=6; i++) {
-        labels[i].className = 'dlabel '+style
+    for (let i = 1; i <= 6; i++) {
+        labels[i].className = 'dlabel ' + style;
     }
 }
 
 export function onNext () {
-    if(++step >=6 ) step = 0;
+    if (++step >= 6 ) step = 0;
     show();
 
 }
 export function onPrev () {
-    if(--step < 0 ) step = 5;
+    if (--step < 0 ) step = 5;
     show();
 }
 

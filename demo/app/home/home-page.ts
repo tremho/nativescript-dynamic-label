@@ -20,5 +20,5 @@ export function goCity(args) {
     const btn = args.object;
     const page = btn.page;
 
-    page.frame.navigate('home/citylabel-page')
+    page.frame.navigate('home/citylabel-page');
 }

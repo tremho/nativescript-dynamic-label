@@ -1,7 +1,7 @@
 import { Label } from 'tns-core-modules/ui/label';
 import { EventData } from 'tns-core-modules/data/observable';
 import { FitResults } from "./local-types";
-import { screen } from 'tns-core-modules/platform'
+import { screen } from 'tns-core-modules/platform';
 const scale = screen.mainScreen.scale;
 
 export class Common extends Label {

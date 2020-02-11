@@ -43,7 +43,7 @@ export function onNext ()  {
     show();
 }
 export function onPrev () {
-    if (--step < 0) step = testItems.length-1;
+    if (--step < 0) step = testItems.length - 1;
     show();
 
 }
