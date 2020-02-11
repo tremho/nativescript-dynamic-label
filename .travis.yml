@@ -39,7 +39,7 @@ matrix:
       jdk: oraclejdk8
       script: 
         - cd src && npm i && npm run tsc && cd ../demo && tns build ios
-    - os: linux
+     os: linux
       language: android
       dist: precise
       sudo: required
@@ -51,7 +51,7 @@ matrix:
       before_install:
         - nvm install 10
       script: cd src && npm run test.android
-    - os: osx
+     os: osx
       language: node_js
       node_js: "10"
       jdk: oraclejdk8
