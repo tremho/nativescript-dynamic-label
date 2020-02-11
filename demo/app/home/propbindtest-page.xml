@@ -19,7 +19,9 @@
                 <dl:DynamicLabel textWrap='true' className='dlabel' id="dl3w" text="{{ text3 }}"/>
             </StackLayout>
         </DockLayout>
-        <Button className='m-b-20' text="next label text" tap="onNext"/>
-        <Button text="go back" tap="onBack"/>
+        <FlexboxLayout className='m-t-20 m-b-20' orientation="horizontal" >
+            <Button text="<<-" tap="onPrev"/> <Button text="->>" tap="onNext"/>
+        </FlexboxLayout>
+        <Button text="Main Menu" tap="onMenu"/>
     </StackLayout>
 </Page>

@@ -7,5 +7,6 @@
         <Button text="Dynamic Label List" tap="goList"/>
         <Button text="Dynamic Label via prop set" tap="goProp"/>
         <Button text="Dynamic Labels styled" tap="goStyle"/>
+        <Button text="City List fit demo" tap="goCity"/>
     </StackLayout>
 </Page>

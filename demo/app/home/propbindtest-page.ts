@@ -1,8 +1,6 @@
 
 import { Observable } from 'tns-core-modules/data/observable';
 
-let dl1, dl2, dl3;
-
 let props;
 
 const testItems = [
@@ -41,9 +39,15 @@ class PropModel extends Observable {
 }
 
 export function onNext ()  {
-
-    nextTest();
+    if (++step >= testItems.length) step = 0;
+    show();
 }
+export function onPrev () {
+    if (--step < 0) step = testItems.length-1;
+    show();
+
+}
+
 export function onMenu (args)  {
     const btn = args.object;
     const page = btn.page;
@@ -53,9 +57,6 @@ export function onMenu (args)  {
 
 export function onNavigatingTo (args) {
     const page = args.object;
-    dl1 = page.getViewById('dl1');
-    dl2 = page.getViewById('dl2');
-    dl3 = page.getViewById('dl3');
     step = 0;
 
     props = new PropModel();
@@ -66,9 +67,8 @@ export function onNavigatingTo (args) {
 
 }
 
-function nextTest () {
-    let t = testItems[step++];
-    if (step >= testItems.length) step = 0;
+function show () {
+    let t = testItems[step];
 
     props.set('text1', t);
     props.set('text2', t);

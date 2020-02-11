@@ -1,5 +1,5 @@
 import { Common } from './dynamic-label.common';
-import { Bounds, LineInfo, FitResults } from './OurTypes';
+import { Bounds, LineInfo, FitResults } from './local-types';
 
 const { Paint, Rect } = android.graphics;
 class PaintType extends Paint {}
@@ -19,15 +19,10 @@ export class DynamicLabel extends Common {
             // we should be able to get to our TextView here.
             const tv = this.android as TextViewType;
             const mTextPaint = tv.getPaint() as PaintType;
-            mTextPaint.setTextSize(textSize); // todo: from tv?
-            // todo: need to also match typeface and style, I assume...
+            mTextPaint.setTextSize(textSize);
 
-            // the problem with this approach is that this only measures a single line.
-            // There is an API to measure text break points
-            // and I've seen sample code that uses this to do text wrap onto a canvas.
-            // Presumably we could do the same thing and merge up all the extents
-            // so that we have a merged bounds result in the end
-            // do that now...
+            // Build the bounds a line at a time using the text wrappings and the resulting bounds per line
+            // that the Android Paint class computes for us according to the wrap algorithm in TextRect below.
             const tr = new TextRect(mTextPaint);
             /*let oneLineHeight = */
             tr.prepare(text, maxWidth, maxHeight); // compute text wrappings
@@ -50,13 +45,9 @@ export class DynamicLabel extends Common {
         return {width, height, lines: lineSpans, wasCut};
 
     }
-
-    // public fitText (): void {
-    //     this.android.setGravity(17);
-    //     super.fitText();
-    // }
-
 }
+
+// this code is courtesy Chris Banes: https://chris.banes.dev/2014/03/27/measuring-text/
 
 class TextRect {
 
@@ -103,13 +94,15 @@ class TextRect {
         this.wasCut = false;
 
         // get maximum number of characters in one line
+        const testText = 'WiM';
         this.paint.getTextBounds(
-            "i",
+            testText,
             0,
-            1,
+            testText.length,
             this.bounds );
 
-        let maximumInLine = maxWidth / this.bounds.width();
+        let avgWidth = this.bounds.width() / testText.length;
+        let maximumInLine = maxWidth / avgWidth;
         let length = text.length;
 
         if (length > 0 ) {

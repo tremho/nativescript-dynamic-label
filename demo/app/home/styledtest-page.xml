@@ -1,0 +1,26 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo"
+      xmlns:dl="nativescript-dynamic-label"
+      class="page"
+>
+    <StackLayout>
+        <Label className='m-b-10' textWrap='true' text="Just to show you can style a DynamicLabel in much the same way as a normal Label, using CSS or direct properties."/>
+
+        <DockLayout>
+            <StackLayout dock="left">
+                <dl:DynamicLabel className='dlabel' id="styledLabel1" text="{{ text1 }}"/>
+                <dl:DynamicLabel className='dlabel' id="styledLabel2" text="{{ text2 }}"/>
+                <dl:DynamicLabel className='dlabel' id="styledLabel3" text="{{ text3 }}"/>
+            </StackLayout>
+            <StackLayout dock="right">
+                <dl:DynamicLabel className='dlabel' id="styledLabel4" text="{{ text4 }}"/>
+                <dl:DynamicLabel className='dlabel' id="styledLabel5" text="{{ text5 }}"/>
+                <dl:DynamicLabel className='dlabel' id="styledLabel6" text="{{ text6 }}"/>
+            </StackLayout>
+        </DockLayout>
+        <FlexboxLayout className='m-b-20' orientation="horizontal">
+            <Button text="<<=" tap="onPrev"/> <dl:DynamicLabel width="80" text="{{ style }}"/> <Button text="=>>" tap="onNext"/>
+        </FlexboxLayout>
+
+        <Button text="Main Menu" tap="onMenu"/>
+    </StackLayout>
+</Page>

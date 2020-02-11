@@ -5,7 +5,6 @@
 This is where the vast majority of your CSS code goes. */
 
 .dlabel {
-    font-weight: bold;
     padding: 0;
     width: 100;
     height: 50;
@@ -20,18 +19,61 @@ This is where the vast majority of your CSS code goes. */
 #dl1, #dl1w {
     width: 150;
     height: 30;
-    /*background-color: #aa0000;*/
 }
 
 #dl2, #dl2w {
     width: 100;
     height: 100;
-    /*background-color: #aaaaaa;*/
 }
 
 #dl3, #dl3w {
     width: 200;
     height: 100;
-    /*color: white;*/
-    /*background-color: #0000aa;*/
+}
+
+.style0 {
+    width: 30%;
+    height: 50;
+    font-family: "BlackChancery";
+}
+.style1 {
+    width: 30%;
+    height: 20;
+    font-family: "Good Times", "good times rg";
+    font-weight: bold;
+}
+.style2 {
+    width: 30%;
+    height: 30;
+    font-family: "Precious";
+}
+.style3 {
+    width: 30%;
+    height: 40;
+    font-family: "Runy Tunes Revisited NF";
+    font-variant: small-caps;
+}
+.style4 {
+    width: 150;
+    height: 35;
+    font-family: "Scriptina", "Scriptina - Alternates", "SCRIPTIN", "SCRIPALT";
+    font-weight: bold;
+}
+.style5 {
+    font-family: "Helvetica", "Arial";
+    font-style: italic;
+}
+
+.cityLabel {
+    font-weight: bold;
+    padding: 0;
+    width: 130;
+    height: 25;
+    border-color: black;
+    border-style: solid;
+    border-width: 1;
+    background-color: #eeeeee;
+    text-align: left;
+    text-wrap: true;
+
 }

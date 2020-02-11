@@ -1,0 +1,22 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo"
+      xmlns:dl="nativescript-dynamic-label"
+      class="page"
+>
+
+
+    <StackLayout>
+        <Label className='m-b-20' textWrap='true' text='This shows a set of labels the same size where different text is given and it is meant to display reasonably for widely varying lengths of text. This is a real-world example and the originating use-case for this development'/>
+        <ScrollView height="1000">
+            <StackLayout>
+                <dl:DynamicLabel className="cityLabel" text="Seattle, WA"/>
+                <dl:DynamicLabel className="cityLabel" text="San Francisco, CA"/>
+                <dl:DynamicLabel className="cityLabel" text="Albuquerque, NM"/>
+                <dl:DynamicLabel className="cityLabel" text="New York, NY"/>
+                <dl:DynamicLabel className="cityLabel" text="Disneyland, Anaheim, CA"/>
+                <dl:DynamicLabel className="cityLabel" text="National Mall, Washington, D.C."/>
+                <dl:DynamicLabel className="cityLabel" text="Piazza San Pietro, 00120 Città del Vaticano, Vatican City"/>
+                <Button className='m-t-20' text="Main Menu" tap="onMenu"/>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</Page>

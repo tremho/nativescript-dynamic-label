@@ -1,6 +1,8 @@
 import { Label } from 'tns-core-modules/ui/label';
-import { Observable, EventData, PropertyChangeData } from 'tns-core-modules/data/observable';
-import { FitResults } from "./OurTypes";
+import { EventData } from 'tns-core-modules/data/observable';
+import { FitResults } from "./local-types";
+import { screen } from 'tns-core-modules/platform'
+const scale = screen.mainScreen.scale;
 
 export class Common extends Label {
 
@@ -28,7 +30,8 @@ export class Common extends Label {
 
   private findWidth(): number {
       function widthOf (view) {
-          const w = view.width;
+          const mw = view.getMeasuredWidth() / scale;
+          const w = mw || view.width;
           if (typeof w === 'number') {
               return w;
           } else {
@@ -40,7 +43,8 @@ export class Common extends Label {
   }
     private findHeight(): number {
         function heightOf(view) {
-            const h = view.height;
+            const mh = view.getMeasuredHeight() / scale;
+            const h = mh || view.height;
             if (typeof h === 'number') {
                 return h;
             } else {
@@ -89,6 +93,8 @@ export class Common extends Label {
      */
 
   public fitText (): void {
+      console.log(`\\/------------------------ ${this.id} -------------------\\/`);
+      console.log(`control id ${this.id} : ${this.width} x ${this.height}`);
       let text = this.text;
       if (text === 'Seattle, WA') {
           if (this.id === 'dl2w') {
@@ -132,15 +138,17 @@ export class Common extends Label {
 
           size = Math.round(Math.floor(size * 10) / 10);
           if (size === lastSize) {
-              size -= 2; // additional relief to insure fit of small words with no ellipsis.
+              size *= 0.8; // adjust scale? this is a magic number.
+
               console.log(`chosen font size is ${size}`);
-              this.fontSize = size;
+              this.fontSize = 0;
               this.text = text;
+              this.fontSize = size;
               setTimeout(() => {
                   const mw = this.getMeasuredWidth();
                   const mh = this.getMeasuredHeight();
                   console.log(`realized control is ${mw} x ${mh} [ ${mw / 3} x ${mh / 3} ]`);
-                  console.log(`computed bounds is ${bounds.width} x ${bounds.height}`);
+                  console.log(`computed bounds is ${bounds.width} x ${bounds.height} @ ${this.fontSize}`);
               });
               break;
           }

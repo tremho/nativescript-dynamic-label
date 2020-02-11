@@ -19,8 +19,7 @@
                 <dl:DynamicLabel className='dlabel' text="The8thEntryHasNoPlaceToBreakTheWordsAtAndWillCharacterWrapToFit" textWrap="true"/>
                 <dl:DynamicLabel className='dlabel' text="The9thEntryIsAlsoLongButForcedToOneLineSoItWillAppearTiny" textWrap="false"/>
                 <dl:DynamicLabel className='dlabel' text="The 10th Entry" textWrap="false"/>
-                <Button className='mb-20' text="next demo" tap="onNext"/>
-                <Button text="main menu" tap="onMenu"/>
+                <Button className='mb-20' text="Main Menu" tap="onMenu"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

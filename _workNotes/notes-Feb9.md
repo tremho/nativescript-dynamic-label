@@ -43,17 +43,20 @@ in unusual cases, like really small or really large strings.
 
 The demo code needs a few changes:
 
-- [ ] Have two (or more) labels with different sizes
+- [X] Have two (or more) labels with different sizes
 that we set the same text into.
 
 - [ ] Make the static list a table with descriptions
 of what we are looking at on the right.
 
-- [ ] Make a third page demo that dynamically changes the
+- [ ] ~~Make a third page demo that dynamically changes the
 text of a DL through binding.
 In the end, we may get rid of page2 here, since
 2 and 3 would be basically the same demo, but
-page 3 is more {N} like. 
+page 3 is more {N} like.~~
+
+- [ ] Make the 3rd page a styling demo. show
+different fonts, etc. in a gallery format. 
 
 
 
@@ -62,9 +65,9 @@ page 3 is more {N} like.
 Need to do a new fitText on the change of
 key properties.
 
-- [ ] learn about property change listener
-- [ ] implement it for the DL
-- [ ] debounce a call to FitText as a result.  
+- [X] learn about property change listener
+- [X] implement it for the DL (textChange, loaded)
+- [X] debounce a call to FitText as a result.  
 
 
 ### iOS Support
