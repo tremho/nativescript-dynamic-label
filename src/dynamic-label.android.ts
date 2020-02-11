@@ -12,42 +12,49 @@ export class DynamicLabel extends Common {
 
     public getTextExtent(text: string, textSize: number, maxWidth: number, maxHeight: number): FitResults {
 
-        // we should be able to get to our TextView here.
-        const tv = this.android as TextViewType;
-
-        const mTextPaint = tv.getPaint() as PaintType;
-        mTextPaint.setTextSize(textSize); // todo: from tv?
-        // todo: need to also match typeface and style, I assume...
-
-        // the problem with this approach is that this only measures a single line.
-        // There is an API to measure text break points
-        // and I've seen sample code that uses this to do text wrap onto a canvas.
-        // Presumably we could do the same thing and merge up all the extents
-        // so that we have a merged bounds result in the end
-        // do that now...
-        const tr = new TextRect(mTextPaint);
-        /*let oneLineHeight = */ tr.prepare(text, maxWidth, maxHeight); // compute text wrappings
-        const lineSpans = tr.textLinesOut();
+        let lineSpans = []
+        let wasCut;
         const outRect = new Rect();
-        for (let i = 0; i < lineSpans.length; i++) {
+        try {
+            // we should be able to get to our TextView here.
+            const tv = this.android as TextViewType;
+            const mTextPaint = tv.getPaint() as PaintType;
+            mTextPaint.setTextSize(textSize); // todo: from tv?
+            // todo: need to also match typeface and style, I assume...
 
-            let lineText = lineSpans[i].text;
-            let left = lineSpans[i].left;
-            const textBounds = new Rect();
-            mTextPaint.getTextBounds(lineText, 0, lineText.length, textBounds);
-            textBounds.offset(left, outRect.height());
-            outRect.union(textBounds);
+            // the problem with this approach is that this only measures a single line.
+            // There is an API to measure text break points
+            // and I've seen sample code that uses this to do text wrap onto a canvas.
+            // Presumably we could do the same thing and merge up all the extents
+            // so that we have a merged bounds result in the end
+            // do that now...
+            const tr = new TextRect(mTextPaint);
+            /*let oneLineHeight = */
+            tr.prepare(text, maxWidth, maxHeight); // compute text wrappings
+            wasCut = tr.wasTextCut();
+            lineSpans = tr.textLinesOut();
+            for (let i = 0; i < lineSpans.length; i++) {
+
+                let lineText = lineSpans[i].text;
+                let left = lineSpans[i].left;
+                const textBounds = new Rect();
+                mTextPaint.getTextBounds(lineText, 0, lineText.length, textBounds);
+                textBounds.offset(left, outRect.height());
+                outRect.union(textBounds);
+            }
+        } catch(e) {
+            console.error(e)
         }
         const width = outRect.width();
         const height = outRect.height();
-        return {width, height, lines: lineSpans, wasCut: tr.wasTextCut()};
+        return {width, height, lines: lineSpans, wasCut};
 
     }
 
-    public fitText (): void {
-        this.android.setGravity(17);
-        super.fitText();
-    }
+    // public fitText (): void {
+    //     this.android.setGravity(17);
+    //     super.fitText();
+    // }
 
 }
 

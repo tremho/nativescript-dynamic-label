@@ -1,22 +1,30 @@
 import { Label } from 'tns-core-modules/ui/label';
-import { EventData } from 'tns-core-modules/data/observable';
+import { Observable, EventData, PropertyChangeData } from 'tns-core-modules/data/observable';
 import { FitResults } from "./OurTypes";
 
 export class Common extends Label {
 
+  private _isLoaded: boolean;
+
   constructor() {
       super();
       this.on('loaded', (eventData: EventData) => {
-          console.log('dynamic label loaded');
           const lbl = eventData.object as Common;
-          lbl.lineHeight = 0; // weird, but it works
+          this._isLoaded = true;
+          lbl.lineHeight = 0; // weird, but it works (sort of)
           if (lbl.android) {
-              console.log('setting gravity to CENTER');
               lbl.android.setGravity(17);
               lbl.fitText();
           }
       });
+      this.on('textChange', (eventData: EventData) => {
+          const lbl = eventData.object as Common;
+          if(this._isLoaded) {
+            lbl.fitText();
+          }
+      });
   }
+
 
   private findWidth(): number {
       function widthOf (view) {
@@ -82,6 +90,11 @@ export class Common extends Label {
 
   public fitText (): void {
       let text = this.text;
+      if (text === 'Seattle, WA') {
+          if (this.id === 'dl2w') {
+            console.log('debug break here')
+          }
+      }
       if (text.indexOf('9thEntry') !== -1) {
           console.log("debug break here");
       }
@@ -106,7 +119,7 @@ export class Common extends Label {
               const t = bounds.lines[i].text;
               console.log(">>> " + t);
           }
-          const nofit = bounds.wasCut || (oneLiner && bounds.lines.length > 1) || bounds.height > maxHeight;
+          const nofit = bounds.wasCut || (oneLiner && bounds.lines.length > 1) || bounds.width >= maxWidth || bounds.height >= maxHeight;
           if (nofit) {
               // smaller
               maxSize = size;

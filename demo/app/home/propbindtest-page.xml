@@ -1,0 +1,25 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo"
+      xmlns:dl="nativescript-dynamic-label"
+      class="page"
+>
+
+
+    <StackLayout>
+        <Label textWrap='true' text="This demo page lays out a couple sizes of Dynamic Label containers. Then, new label text is set to both labels with each new button press, and we see it format to handle the new text in each size."/>
+
+        <DockLayout>
+            <StackLayout dock="left">
+                <dl:DynamicLabel className='dlabel' id="dl1" text="{{ text1 }}"/>
+                <dl:DynamicLabel className='dlabel' id="dl2" text="{{ text2 }}"/>
+                <dl:DynamicLabel className='dlabel' id="dl3" text="{{ text3 }}"/>
+            </StackLayout>
+            <StackLayout dock="right">
+                <dl:DynamicLabel textWrap='true' className='dlabel' id="dl1w" text="{{ text1 }}"/>
+                <dl:DynamicLabel textWrap='true' className='dlabel' id="dl2w" text="{{ text2 }}"/>
+                <dl:DynamicLabel textWrap='true' className='dlabel' id="dl3w" text="{{ text3 }}"/>
+            </StackLayout>
+        </DockLayout>
+        <Button className='m-b-20' text="next label text" tap="onNext"/>
+        <Button text="go back" tap="onBack"/>
+    </StackLayout>
+</Page>

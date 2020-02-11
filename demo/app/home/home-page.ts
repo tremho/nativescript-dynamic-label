@@ -1,16 +1,18 @@
-import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout';
-
-/*
-In NativeScript, a file with the same name as an XML file is known as
-a code-behind file. The code-behind is a great place to place your view
-logic, and to set up your page’s data binding.
-*/
-
-export function onNext (args)  {
+export function goList (args)  {
     const btn = args.object;
     const page = btn.page;
 
-    console.log('onNext');
+    page.frame.navigate('home/labellist-page');
+}
+export function goProp (args)  {
+    const btn = args.object;
+    const page = btn.page;
 
-    page.frame.navigate('home/part2-page');
+    page.frame.navigate('home/propbindtest-page');
+}
+export function goStyle (args)  {
+    const btn = args.object;
+    const page = btn.page;
+
+    page.frame.navigate('home/styledtest-page');
 }
