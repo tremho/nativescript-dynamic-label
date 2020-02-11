@@ -23,19 +23,19 @@ class PropModel extends Observable {
 
     set text1 (v) {
         this._text1 = v;
-        this.set('text1', v)
+        this.set('text1', v);
     }
     get text1 () { return this._text1; }
 
     set text2 (v) {
         this._text2 = v;
-        this.set('text2', v)
+        this.set('text2', v);
     }
     get text2 () { return this._text2; }
 
     set text3 (v) {
         this._text3 = v;
-        this.set('text3', v)
+        this.set('text3', v);
     }
     get text3 () { return this._text3; }
 }
@@ -70,7 +70,7 @@ function nextTest () {
     let t = testItems[step++];
     if (step >= testItems.length) step = 0;
 
-    props.set('text1',t);
-    props.set('text2',t);
-    props.set('text3',t);
+    props.set('text1', t);
+    props.set('text2', t);
+    props.set('text3', t);
 }

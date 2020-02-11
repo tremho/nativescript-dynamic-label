@@ -19,7 +19,7 @@ export class Common extends Label {
       });
       this.on('textChange', (eventData: EventData) => {
           const lbl = eventData.object as Common;
-          if(this._isLoaded) {
+          if (this._isLoaded) {
             lbl.fitText();
           }
       });
@@ -92,7 +92,7 @@ export class Common extends Label {
       let text = this.text;
       if (text === 'Seattle, WA') {
           if (this.id === 'dl2w') {
-            console.log('debug break here')
+            console.log('debug break here');
           }
       }
       if (text.indexOf('9thEntry') !== -1) {

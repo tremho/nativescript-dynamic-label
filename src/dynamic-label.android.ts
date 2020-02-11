@@ -12,7 +12,7 @@ export class DynamicLabel extends Common {
 
     public getTextExtent(text: string, textSize: number, maxWidth: number, maxHeight: number): FitResults {
 
-        let lineSpans = []
+        let lineSpans = [];
         let wasCut;
         const outRect = new Rect();
         try {
@@ -42,8 +42,8 @@ export class DynamicLabel extends Common {
                 textBounds.offset(left, outRect.height());
                 outRect.union(textBounds);
             }
-        } catch(e) {
-            console.error(e)
+        } catch (e) {
+            console.error(e);
         }
         const width = outRect.width();
         const height = outRect.height();
