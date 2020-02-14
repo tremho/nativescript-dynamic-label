@@ -77,12 +77,12 @@ export class Common extends Label {
         if (horz) {
             let l = propValueOf(this, 'paddingLeft');
             let r = propValueOf(this, 'paddingRight');
-            console.log(`horizontal padding ${l} and ${r}`);
+            // console.log(`horizontal padding ${l} and ${r}`);
             return l + r;
         }
         let t = propValueOf(this, 'paddingTop');
         let b = propValueOf(this, 'paddingBottom');
-        console.log(`vertical padding ${t} and ${b}`);
+        // console.log(`vertical padding ${t} and ${b}`);
         return t + b;
     }
     public findRenderWidth(): number {
@@ -99,20 +99,20 @@ export class Common extends Label {
      */
 
   public fitText (): void {
-      console.log(`\\/------------------------ ${this.id} -------------------\\/`);
-      console.log(`control id ${this.id} : ${this.width} x ${this.height}`);
+      // console.log(`\\/------------------------ ${this.id} -------------------\\/`);
+      // console.log(`control id ${this.id} : ${this.width} x ${this.height}`);
       let text = this.text;
-      if (text === 'Seattle, WA') {
-          if (this.id === 'dl2w') {
-            console.log('debug break here');
-          }
-      }
-      if (text.indexOf('9thEntry') !== -1) {
-          console.log("debug break here");
-      }
-      if (text.indexOf('Supercalifrag') !== -1) {
-          console.log("debug break here");
-      }
+      // if (text === 'Seattle, WA') {
+      //     if (this.id === 'dl2w') {
+      //       console.log('debug break here');
+      //     }
+      // }
+      // if (text.indexOf('9thEntry') !== -1) {
+      //     console.log("debug break here");
+      // }
+      // if (text.indexOf('Supercalifrag') !== -1) {
+      //     console.log("debug break here");
+      // }
       let size = 0;
       this.fontSize =  10;
       let minSize = 1;
@@ -123,7 +123,7 @@ export class Common extends Label {
       let maxSize = (maxHeight - size) / 2 + size;
       this.fontSize = maxSize;
       size = maxSize;
-      console.log(`detected target bounds are ${maxWidth} x ${maxHeight}`);
+      // console.log(`detected target bounds are ${maxWidth} x ${maxHeight}`);
 
       let oneLiner = !this.textWrap;
       let wasMultiAt = 0;
@@ -135,14 +135,14 @@ export class Common extends Label {
           // console.log(`${this.id} test fit @ ${size} is ${bounds.wasCut ? 'cut' : 'not cut'} ${bounds.width} x ${bounds.height}`);
           let badWrap = false;
           let numLines = bounds.lines.length;
-          console.log(`${numLines} lines:`);
+          // console.log(`${numLines} lines:`);
           for (let i = 0; i < numLines; i++) {
               const t = bounds.lines[i].text;
               if (i < numLines - 1) {
                   const wc = t.charAt(t.length - 1);
                   badWrap = wc !== ' ' && wc !== ',' && wc !== '-' && wc !== '.' && wc !== '/';
               }
-              console.log(">>> " + t + (badWrap ? '<!' : ''));
+              // console.log(">>> " + t + (badWrap ? '<!' : ''));
           }
           if (!oneLiner && numLines > 1 && !bounds.wasCut && !badWrap) {
               if (wasTightMulti)  {
@@ -150,10 +150,10 @@ export class Common extends Label {
               }
               else wasMultiAt = Math.max(wasMultiAt, size);
               wasTightMulti = badWrap || bounds.height > testHeight * 0.67;
-              console.log(`multi choice is ${(wasTightMulti ? 'tight' : '')} ` + wasMultiAt);
+              // console.log(`multi choice is ${(wasTightMulti ? 'tight' : '')} ` + wasMultiAt);
           }
           let nofit = badWrap || bounds.wasCut || (oneLiner && bounds.lines.length > 1) || bounds.width  > testWidth || bounds.height > testHeight;
-          console.log(`${this.id} test ${(nofit ? 'NO fit' : 'fits')} @ ${size} => ${bounds.wasCut ? 'cut' : 'not cut'} ${bounds.width} x ${bounds.height} ${badWrap ? 'badWrap' : 'goodWrap'}`);
+          // console.log(`${this.id} test ${(nofit ? 'NO fit' : 'fits')} @ ${size} => ${bounds.wasCut ? 'cut' : 'not cut'} ${bounds.width} x ${bounds.height} ${badWrap ? 'badWrap' : 'goodWrap'}`);
 
           if (nofit) {
               // smaller
@@ -178,7 +178,7 @@ export class Common extends Label {
       }
       // weird scale adjustment. magic number...
       size = size * 0.8;
-      console.log(`chosen font size is ${lastSize} scaled to ${size}`);
+      // console.log(`chosen font size is ${lastSize} scaled to ${size}`);
       this.fontSize = 0;
       this.lineHeight = 1;
       this.text = text;
@@ -187,8 +187,8 @@ export class Common extends Label {
           const mw = this.getMeasuredWidth();
           const mh = this.getMeasuredHeight();
           const bounds = this.getTextExtent(text, size, mw / scale, mh / scale);
-          console.log(`realized control is ${mw} x ${mh} [ ${mw / scale} x ${mh / scale} ]`);
-          console.log(`computed bounds is ${bounds.width} x ${bounds.height} @ ${this.fontSize}`);
+          // console.log(`realized control is ${mw} x ${mh} [ ${mw / scale} x ${mh / scale} ]`);
+          // console.log(`computed bounds is ${bounds.width} x ${bounds.height} @ ${this.fontSize}`);
       });
   }
 
