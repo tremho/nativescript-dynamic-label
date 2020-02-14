@@ -1,5 +1,5 @@
 import { Common } from './dynamic-label.common';
-import { Bounds, FitResults, LineInfo, LineFit } from "./local-types.d";
+import { Bounds, FitResults, LineInfo, LineFit } from "./local-definitions";
 import { screen } from 'tns-core-modules/platform';
 const scale = screen.mainScreen.scale;
 

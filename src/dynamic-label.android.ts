@@ -1,5 +1,5 @@
 import { Common } from './dynamic-label.common';
-import {LineInfo, FitResults, LineFit} from './local-types.d';
+import {LineInfo, FitResults, LineFit} from './local-definitions';
 
 const { Paint, Rect } = android.graphics;
 class PaintType extends Paint {}
