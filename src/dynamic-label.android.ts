@@ -1,5 +1,5 @@
 import { Common } from './dynamic-label.common';
-import { LineInfo, FitResults } from './local-types.d';
+import {LineInfo, FitResults, LineFit} from './local-types.d';
 
 const { Paint, Rect } = android.graphics;
 class PaintType extends Paint {}
@@ -94,21 +94,14 @@ class TextRect {
         this.wasCut = false;
 
         // get maximum number of characters in one line
-        const testText = 'WiM';
-        this.paint.getTextBounds(
-            testText,
-            0,
-            testText.length,
-            this.bounds );
-
-        let avgWidth = this.bounds.width() / testText.length;
-        let maximumInLine = maxWidth / avgWidth;
+        let lineFitInfo = this.findLineFit(text, maxWidth);
+        let maximumInLine = lineFitInfo.maxIndex;
         let length = text.length;
 
         if (length > 0 ) {
             let lineHeight = -this.metrics.ascent + this.metrics.descent;
             let start = 0;
-            let stop = maximumInLine > length ? length : maximumInLine;
+            let stop = maximumInLine;
 
             for ( ; ; ) {
                 // skip LF and spaces
@@ -247,5 +240,21 @@ class TextRect {
     public wasTextCut(): boolean {
         return this.wasCut;
     }
+
+    public findLineFit(text: string, cwidth: number): LineFit {
+        let index = text.length;
+        let width, height;
+        while (--index) {
+            let bounds: RectType = new Rect();
+            this.paint.getTextBounds(text, 0, index, bounds);
+            if (bounds.width() < cwidth) {
+                width = bounds.width();
+                height = bounds.height();
+                break;
+            }
+        }
+        return { maxIndex: index + 1, width, height };
+    }
+
 }
 

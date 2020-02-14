@@ -11,62 +11,6 @@ const CGFLOAT_MAX = FLOAT_MAX;
 
 export class DynamicLabel extends Common {
 
-    // public getTextExtent(text: string, textSize: number, maxWidth: number, maxHeight: number): FitResults {
-    //     let nstext = NSString.alloc().initWithString(this.text);
-    //     let cheight = this.findRenderHeight();
-    //     let cwidth = this.findRenderWidth();
-    //     let uiLabel = <UILabel>this.ios;
-    //     let fontName = uiLabel.font.fontName;
-    //     let fontSize = uiLabel.font.pointSize;
-    //     console.log(`------------- font is ${fontSize} pt ${fontName}`);
-    //     let lines = this.prepareLines(uiLabel, cwidth, cheight);
-    //     let tempWidth;
-    //     if (lines.length > 1) tempWidth = cwidth;
-    //     else tempWidth = DBL_MAX;
-    //     let fsize = nstext.sizeWithFontForWidthLineBreakMode(uiLabel.font, tempWidth, NSLineBreakMode.ByWordWrapping);
-    //     return {
-    //         width: fsize.width,
-    //         height: fsize.height,
-    //         lines,
-    //         wasCut: (fsize.height > cheight || fsize.width > cwidth)
-    //     }
-    // }
-    //
-    // private prepareLines(uiLabel: UILabel, width: number, height: number): LineInfo[] {
-    //     const lines = [];
-    //
-    //     // init text storage
-    //     const textStorage = NSTextStorage.alloc().initWithAttributedString(uiLabel.attributedText);
-    //     const layoutManager = NSLayoutManager.alloc().init();
-    //     textStorage.addLayoutManager(layoutManager);
-    //
-    //     // init text container
-    //     const textContainer = NSTextContainer.alloc().initWithSize(CGSizeMake(width, height + 100));
-    //     textContainer.lineFragmentPadding = 0;
-    //     textContainer.maximumNumberOfLines = uiLabel.numberOfLines;
-    //     textContainer.lineBreakMode = uiLabel.lineBreakMode;
-    //
-    //     layoutManager.addTextContainer(textContainer);
-    //
-    //     let numberOfLines: number, index: number;
-    //     let numberOfGlyphs = layoutManager.numberOfGlyphs;
-    //
-    //     let lineRange = new NSRange();
-    //     for (numberOfLines = 0, index = 0; index < numberOfGlyphs; numberOfLines++) {
-    //         let lastIndex = index;
-    //         layoutManager.lineFragmentRectForGlyphAtIndexEffectiveRange(index, new interop.Reference(lineRange));
-    //         index = lineRange.location + lineRange.length; // NSMaxRange
-    //         console.log(`index ${index}, numberOfLines ${numberOfLines}`);
-    //         if (index === lastIndex) index = numberOfGlyphs;
-    //
-    //         // I think lineRange corresponds to text position, so...
-    //         const ln = {text: this.text.substring(lineRange.location, index), left: 0}; // todo: the left property is meaningless
-    //         lines.push(ln);
-    //     }
-    //     console.log('prepareLines 5')
-    //     return lines;
-    // }
-
     // Adapted for ios from android version
     public getTextExtent(text: string, textSize: number, maxWidth: number, maxHeight: number): FitResults {
 

@@ -6,21 +6,60 @@
 
     <StackLayout>
         <ScrollView height="1000">
-            <StackLayout>
-                <Label className='dlabel' text='normal label'/>
-                <dl:DynamicLabel className='dlabel' text="dynamic label"/>
-                <dl:DynamicLabel className='dlabel' text="X"/>
-                <dl:DynamicLabel className='dlabel' text="first"/>
-                <dl:DynamicLabel className='dlabel' text="second label" />
-                <dl:DynamicLabel className='dlabel' text="third label in set" textWrap="false"/>
-                <dl:DynamicLabel className='dlabel' text="fourth label, with wrap" textWrap="true"/>
-                <dl:DynamicLabel className='dlabel' text="fifth entry is a long line of text" textWrap="true"/>
-                <dl:DynamicLabel className='dlabel' text="seventh entry is a VERY long rambling paragraph that really shouldn't fit after all is said and done and computed" textWrap="true"/>
-                <dl:DynamicLabel className='dlabel' text="The8thEntryHasNoPlaceToBreakTheWordsAtAndWillCharacterWrapToFit" textWrap="true"/>
-                <dl:DynamicLabel className='dlabel' text="The9thEntryIsAlsoLongButForcedToOneLineSoItWillAppearTiny" textWrap="false"/>
-                <dl:DynamicLabel className='dlabel' text="The 10th Entry" textWrap="false"/>
+            <DockLayout>
+            <StackLayout dock="right">
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="this is a normal Nativescript label, for comparison."/>
+                    <Label className='dlabel m-l-10' text='normal label'/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="this is a dynamic label with the same CSS class"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="dynamic label"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="this dynamic label has a single character, scaled to fit"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="X"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="a simple test of a single short word"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="first"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="a slightly longer string of text"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="second label" />
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="longer still, but no wrapping allowed"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="third label in set" textWrap="false"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="also longer, but with textWrap='true'"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="fourth label, with wrap" textWrap="true"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="even longer, should scale and wrap to fit"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="fifth entry is a long line of text" textWrap="true"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="Very long text that will scale to very tiny"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="seventh entry is a VERY long rambling paragraph that really shouldn't fit after all is said and done and computed" textWrap="true"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="A long string with a hyphen to word break at, and textwrap='true'"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="The8thEntryHasNoPlaceToBreakTheWordsAt-AndWillCharacterWrapToFit" textWrap="true"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="A long string also with hyphens, but textwrap='false'"/>
+                    <dl:DynamicLabel className='dlabel m-l-10' text="The9thEntryIsAlsoLong-ButForcedToOneLine-SoItWillAppearTiny" textWrap="false"/>
+                </FlexboxLayout>
+                <FlexboxLayout orientation="horizontal" >
+                    <Label text ="That's it.  Back to a boring label."/>
+                    <dl:DynamicLabel className='dlabel' text="The 10th Entry" textWrap="false"/>
+                </FlexboxLayout>
                 <Button className='mb-20' text="Main Menu" tap="onMenu"/>
             </StackLayout>
+            </DockLayout>
+
         </ScrollView>
     </StackLayout>
 </Page>
