@@ -117,7 +117,7 @@ export class Common extends Label {
       console.log(`detected target bounds are ${maxWidth} x ${maxHeight}`);
 
       let oneLiner = !this.textWrap;
-      let wasMultiAt = 0
+      let wasMultiAt = 0;
       while (true) {
           let lastSize = size;
           this.fontSize = size;
@@ -128,13 +128,13 @@ export class Common extends Label {
           console.log(`${numLines} lines:`);
           for (let i = 0; i < numLines; i++) {
               const t = bounds.lines[i].text;
-              if (i < numLines -1) {
+              if (i < numLines - 1) {
                   const wc = t.charAt(t.length - 1);
                   badWrap = wc !== ' ' && wc !== ',' && wc !== '-' && wc !== '.' && wc !== '/';
               }
               console.log(">>> " + t);
           }
-          if(!oneLiner && numLines > 1 && !bounds.wasCut  && !badWrap) wasMultiAt = Math.max(wasMultiAt, size);
+          if (!oneLiner && numLines > 1 && !bounds.wasCut  && !badWrap) wasMultiAt = Math.max(wasMultiAt, size);
           let nofit = badWrap || bounds.wasCut || (oneLiner && bounds.lines.length > 1) || bounds.width + 10 > maxWidth || bounds.height > maxHeight;
           // if(!nofit && !oneLiner && numLines < 2) {
           //     if(bounds.height < maxHeight / 2) {

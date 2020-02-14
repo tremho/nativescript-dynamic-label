@@ -31,7 +31,7 @@ export class DynamicLabel extends Common {
             for (let i = 0; i < lineSpans.length; i++) {
 
                 let lineText = lineSpans[i].text;
-                let y = lineSpans[i].top
+                let y = lineSpans[i].top;
                 const textBounds = new Rect();
                 mTextPaint.getTextBounds(lineText, 0, lineText.length, textBounds);
                 textBounds.offset(0, y);

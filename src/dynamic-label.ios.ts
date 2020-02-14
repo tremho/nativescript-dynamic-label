@@ -72,7 +72,7 @@ export class DynamicLabel extends Common {
 
         let lineSpans = [];
         let wasCut;
-        let outBounds = CGSizeMake(0,0);
+        let outBounds = CGSizeMake(0, 0);
         let originalFontSize = this.fontSize;
         try {
             // we should be able to get to our TextView here.
@@ -111,7 +111,7 @@ class TextRect {
     // the number of allocations to avoid triggering the
     // GC too much
     // private metrics: FontMetricsInt = null;
-    private uiLabel:UILabel;
+    private uiLabel: UILabel;
     private starts: number[] = new Array(TextRect.MAX_LINES);
     private stops: number[] = new Array(TextRect.MAX_LINES);
     private lines: number = 0;
@@ -177,7 +177,7 @@ class TextRect {
                     //     stop,
                     //     this.bounds);
                     let subtext = text.substring(start, stop);
-                    let subfit = this.findLineFit(subtext, maxWidth)
+                    let subfit = this.findLineFit(subtext, maxWidth);
                     if (subfit.width > this.bounds.width) this.bounds.width = subfit.width;
                     this.bounds.height += subfit.height;
 
@@ -288,20 +288,20 @@ class TextRect {
         return this.wasCut;
     }
 
-    public findLineFit(text:string, cwidth:number): LineFit {
+    public findLineFit(text: string, cwidth: number): LineFit {
         let index = text.length;
         let width, height;
-        while(--index) {
-            let nstext = NSString.alloc().initWithString(text.substring(0,index));
+        while (--index) {
+            let nstext = NSString.alloc().initWithString(text.substring(0, index));
             let fsize = nstext.sizeWithFont(this.uiLabel.font);
             // interop.free(interop.Pointer(nstext));
-            if (fsize.width/scale < cwidth) {
+            if (fsize.width / scale < cwidth) {
                 width = fsize.width;
                 height = fsize.height;
                 break;
             }
         }
-        return { maxIndex:index + 1, width, height}
+        return { maxIndex: index + 1, width, height };
     }
 
 }
