@@ -95,4 +95,35 @@ fun to look at the downloads.
 Write a blog about it later too. (Medium)
 
 
+### progress 2/12
 
+Working okay --- using same algorithm for both platforms,
+although iOS has some built-in similar support.
+
+Need to look for android equivalent to UILabel adjustment
+
+anyway... only problem now is with bad wrapping.
+
+I think I can tweak the wrapping code and avoid in-word
+breaks.  
+this forces a cut if any word is too long, and thus
+will force a smaller font.
+
+if all else fails, either turn off text wrap for unwrappable
+or else allow bad wrap.
+
+-- I think the problem is with `maximumWidth` as it is a guess.
+We should be able to get a finer point on this.
+I know iOS has a method, but it didn't work earlier (slightly 
+different context).  I think I can do a brute force method
+that should work for both platforms, though.
+
+-------
+###### 2/13
+
+aargh!
+
+I'm getting decent horizontal fits, but the single line
+fit is winning over the multiline options.
+
+maybe reject a multiline fit that doesn't use up 50% of the height?

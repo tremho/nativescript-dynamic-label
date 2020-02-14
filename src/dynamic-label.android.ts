@@ -1,5 +1,5 @@
 import { Common } from './dynamic-label.common';
-import { Bounds, LineInfo, FitResults } from './local-types';
+import { LineInfo, FitResults } from './local-types.d';
 
 const { Paint, Rect } = android.graphics;
 class PaintType extends Paint {}
@@ -31,10 +31,10 @@ export class DynamicLabel extends Common {
             for (let i = 0; i < lineSpans.length; i++) {
 
                 let lineText = lineSpans[i].text;
-                let left = lineSpans[i].left;
+                let y = lineSpans[i].top
                 const textBounds = new Rect();
                 mTextPaint.getTextBounds(lineText, 0, lineText.length, textBounds);
-                textBounds.offset(left, outRect.height());
+                textBounds.offset(0, y);
                 outRect.union(textBounds);
             }
         } catch (e) {
@@ -213,7 +213,6 @@ class TextRect {
      * Draw prepared text at given position.
      */
     public textLinesOut(): LineInfo[] {
-        const left = 0;
         const top = 0;
         if (this.textHeight === 0 )
             return [];
@@ -237,7 +236,7 @@ class TextRect {
             else
                 t = this.text.substring( this.starts[n], this.stops[n] );
 
-            outLines.push({text: t, left});
+            outLines.push({text: t, top: y});
             y += after;
         }
         return outLines;
