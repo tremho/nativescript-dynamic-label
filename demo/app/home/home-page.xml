@@ -8,5 +8,7 @@
         <Button text="Dynamic Label via prop set" tap="goProp"/>
         <Button text="Dynamic Labels styled" tap="goStyle"/>
         <Button text="City List fit demo" tap="goCity"/>
+        <Button text="code creation test" tap="goTest"/>
+        <Label id="testResults" text="{{ testResults }}"/>
     </StackLayout>
 </Page>

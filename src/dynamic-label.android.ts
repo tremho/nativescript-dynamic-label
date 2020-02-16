@@ -1,5 +1,7 @@
 import { Common } from './dynamic-label.common';
 import {LineInfo, FitResults, LineFit} from './local-definitions';
+import { screen } from 'tns-core-modules/platform';
+const scale = screen.mainScreen.scale;
 
 const { Paint, Rect } = android.graphics;
 class PaintType extends Paint {}
@@ -14,6 +16,8 @@ export class DynamicLabel extends Common {
 
         let lineSpans = [];
         let wasCut;
+        const mws = maxWidth * scale;
+        const mhs = maxHeight * scale;
         const outRect = new Rect();
         try {
             // we should be able to get to our TextView here.
@@ -25,7 +29,7 @@ export class DynamicLabel extends Common {
             // that the Android Paint class computes for us according to the wrap algorithm in TextRect below.
             const tr = new TextRect(mTextPaint);
             /*let oneLineHeight = */
-            tr.prepare(text, maxWidth, maxHeight); // compute text wrappings
+            tr.prepare(text, mws, mhs, this.textWrap); // compute text wrappings
             wasCut = tr.wasTextCut();
             lineSpans = tr.textLinesOut();
             for (let i = 0; i < lineSpans.length; i++) {
@@ -38,7 +42,7 @@ export class DynamicLabel extends Common {
                 outRect.union(textBounds);
             }
         } catch (e) {
-            console.error(e);
+            console.error(e, e.stack);
         }
         const width = outRect.width();
         const height = outRect.height();
@@ -87,7 +91,7 @@ class TextRect {
      * @param maxHeight - maximum height in pixels
      * @returns height of text in pixels
      */
-    public prepare (text: string, maxWidth: number, maxHeight: number): number {
+    public prepare (text: string, maxWidth: number, maxHeight: number, multiline: boolean): number {
         this.lines = 0;
         this.textHeight = 0;
         this.text = text;
@@ -97,6 +101,17 @@ class TextRect {
         let lineFitInfo = this.findLineFit(text, maxWidth);
         let maximumInLine = lineFitInfo.maxIndex;
         let length = text.length;
+
+        if (!multiline) {
+            // simplified for single line
+            this.wasCut = maximumInLine < length;
+            this.bounds = new Rect(0, 0, lineFitInfo.width, lineFitInfo.height );
+            this.textHeight = lineFitInfo.height;
+            this.lines = 1;
+            this.starts = [0];
+            this.stops = [maximumInLine];
+            return this.textHeight;
+        }
 
         if (length > 0 ) {
             let lineHeight = -this.metrics.ascent + this.metrics.descent;
@@ -243,8 +258,8 @@ class TextRect {
 
     public findLineFit(text: string, cwidth: number): LineFit {
         let index = text.length;
-        let width, height;
-        while (--index) {
+        let width = 0, height = 0;
+        while (--index > 0) {
             let bounds: RectType = new Rect();
             this.paint.getTextBounds(text, 0, index, bounds);
             if (bounds.width() < cwidth) {

@@ -7,13 +7,18 @@ const scale = screen.mainScreen.scale;
 export class Common extends Label {
 
   private _isLoaded: boolean;
+  private _didLayout: boolean;
 
   constructor() {
       super();
       this.on('layoutChanged', (eventData: EventData) => {
           const lbl = eventData.object as Common;
           if (this._isLoaded) {
-              setTimeout(() => { lbl.fitText(); });
+              if (!this._didLayout) {
+                  this._didLayout = true;
+                  setTimeout(() => { lbl.fitText(); });
+              }
+
           }
       });
       this.on('loaded', (eventData: EventData) => {
@@ -28,6 +33,7 @@ export class Common extends Label {
       this.on('textChange', (eventData: EventData) => {
           const lbl = eventData.object as Common;
           if (this._isLoaded) {
+              this.fontSize = Number.MAX_SAFE_INTEGER;
               setTimeout(() => { lbl.fitText(); });
           }
       });
@@ -36,6 +42,7 @@ export class Common extends Label {
 
   private findWidth(): number {
       function widthOf (view) {
+          if (!view || typeof view.getMeasuredWidth !== 'function') return 0;
           const mw = view.getMeasuredWidth() / scale;
           const w = mw || view.width;
           if (typeof w === 'number') {
@@ -49,6 +56,7 @@ export class Common extends Label {
   }
     private findHeight(): number {
         function heightOf(view) {
+            if (!view || typeof view.getMeasuredHeight !== 'function') return 0;
             const mh = view.getMeasuredHeight() / scale;
             const h = mh || view.height;
             if (typeof h === 'number') {
@@ -104,27 +112,29 @@ export class Common extends Label {
       let text = this.text;
       // if (text === 'Seattle, WA') {
       //     if (this.id === 'dl2w') {
-      //       console.log('debug break here');
+      //       // console.log('debug break here');
       //     }
       // }
       // if (text.indexOf('9thEntry') !== -1) {
-      //     console.log("debug break here");
+      //     // console.log("debug break here");
       // }
       // if (text.indexOf('Supercalifrag') !== -1) {
-      //     console.log("debug break here");
+      //     // console.log("debug break here");
       // }
       let size = 0;
-      this.fontSize =  10;
+      // let oldvis = this.get('visibility');
+      // this.set('visibility', 'hidden');
       let minSize = 1;
       let maxWidth = this.findRenderWidth();
       let maxHeight = this.findRenderHeight();
-      let testWidth = maxWidth * 0.9;
-      let testHeight = maxWidth * 0.6;
+      let testWidth = maxWidth; // * 0.9;
+      let testHeight = maxWidth; // * 0.6;
       let maxSize = (maxHeight - size) / 2 + size;
       this.fontSize = maxSize;
       size = maxSize;
       // console.log(`detected target bounds are ${maxWidth} x ${maxHeight}`);
 
+      let noBadWrap = (text.indexOf('\n') !== -1);
       let oneLiner = !this.textWrap;
       let wasMultiAt = 0;
       let wasTightMulti = false;
@@ -140,7 +150,9 @@ export class Common extends Label {
               const t = bounds.lines[i].text;
               if (i < numLines - 1) {
                   const wc = t.charAt(t.length - 1);
-                  badWrap = wc !== ' ' && wc !== ',' && wc !== '-' && wc !== '.' && wc !== '/';
+                  if (!noBadWrap) {
+                      badWrap = wc !== '\n' && wc !== ' ' && wc !== ',' && wc !== '-' && wc !== '.' && wc !== '/';
+                  }
               }
               // console.log(">>> " + t + (badWrap ? '<!' : ''));
           }
@@ -174,10 +186,9 @@ export class Common extends Label {
       }
       let lastSize = size;
       if (wasMultiAt) {
-          size = wasMultiAt;
+          size = (wasMultiAt + size) / 2;
       }
-      // weird scale adjustment. magic number...
-      size = size * 0.8;
+      size /= 1.5;
       // console.log(`chosen font size is ${lastSize} scaled to ${size}`);
       this.fontSize = 0;
       this.lineHeight = 1;
@@ -189,12 +200,14 @@ export class Common extends Label {
           const bounds = this.getTextExtent(text, size, mw / scale, mh / scale);
           // console.log(`realized control is ${mw} x ${mh} [ ${mw / scale} x ${mh / scale} ]`);
           // console.log(`computed bounds is ${bounds.width} x ${bounds.height} @ ${this.fontSize}`);
+          // this.set('visibility', oldvis);
+          this._didLayout = false;
       });
   }
 
   public getTextExtent (text: string, textSize: number, maxWidth: number, maxHeight: number): FitResults {
 
-      console.error('this method should be overridden by platform implementation code' + text);
+      // console.error('this method should be overridden by platform implementation code' + text);
       const results = { width: maxWidth, height: 0, lines: [], wasCut: false };
       return results;
   }
