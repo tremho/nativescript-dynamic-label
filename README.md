@@ -209,8 +209,19 @@ As of  2/14/2020 this is the first version released for testing.
 
 As issues arise, they will be recorded in this space.
 
+###### Version 1.0.0 
+- crash found when instantiating control in certain containers
+- sizing computed with incorrect scaling  
 
-## Contributing
+_Problems above fixed with release 1.0.1_
+
+## Source code and Contributing
+
+The source for this package is maintained on GitHub at:
+https://github.com/tremho/nativescript-dynamic-label
+
+Structure of the project is based on the templates generated
+with the [Nativescript Plugin Seed](https://docs.nativescript.org/plugins/building-plugins#the-nativescript-plugin-seed) project.
 
 Comments and contributions welcome!
 Please submit your Pull Requests, with as much explanation and examples you can provide to 
