@@ -79,12 +79,20 @@ Like the normal NativeScript `<Label>` and other Nativescript controls,
 text may be set via the `Observable` class and changes made to 
 the bound Observable property.
 
+Of course, you can create a DynamicLabel directly with
+`new DynamicLabel()` as well.
+
+
 
 ###### Using to measure text
 To use this class to measure text, but not necessarily display it, 
 you can call the `getTextExtent` method of the class.
-To use this, first set a font size to the control, and then
-pass the maximum width and height you are attempting to
+
+Note that the label must be placed in a layout container on a page before
+it can be used for measurement.
+
+To use this, pass the text, the font size, and 
+the maximum width and height you are attempting to
 fit text for to `getTextExtent`, and it will return the bounds of the
 text, as well as an indication of whether or not the text will
 fit in this space without being truncated, and also the text
@@ -94,10 +102,10 @@ Note that the line layout may not necessarily match what will be displayed
 by the actual control, since each platform handles its word wrapping
 and fitting in subtle but often significantly different ways.  
 However, it should be reasonably representative of what likely
-would display if set to the control at this font size (assuming
+would display if set to a `Label` control at this font size (assuming
 text wrap is enabled).  This information may be more useful for any
 do-it-yourself layout tasks than for actual representation of what the
-control renders.
+dynamic label itself control renders.
 
 ```javascript
 
@@ -105,8 +113,8 @@ let computedWidth, computedHeight;
 let maxWidth = 100; // constrain to this width
 let maxHeight = 1000; // let it find the height < this
 let myDLabel = page.getViewById('myDLabel');
-myDLabel.fontSize = 20; // let's compute for this font size
-let bounds = myDLabel.getTextExtent(myText, maxWidth, maxHeight);
+let textSize = 20; // let's compute for this font size
+let bounds = myDLabel.getTextExtent(myText, textSize, maxWidth, maxHeight);
 if(bounds.wasCut) {
     console.error("Text doesn't fit in these bounds at this size!")
 } else {
